@@ -8550,7 +8550,7 @@ var h = {
 
 var connection = new Postmonger.Session();
 
-connection.trigger('initActivity',{"id":1 , "name":"Mike"});
+//connection.trigger('initActivity',{"id":1 , "name":"Mike"});
 
 connection.trigger('ready');
 const https = require('https');
@@ -8570,11 +8570,8 @@ connection.on('initActivity',function(data){
     fetch('https://gateway-stage-dmz.optum.com/api/stage/cel/optumisl/epmp/v1.5/preferences',
     {
       method : 'POST',
-     headers :{ Authorization:'Bearer '+data.access_token , 'actor' : 'UMR_SalesForce', 'Content-Type':'application/json'},
-
-      agent : new https.Agent({
-        rejectUnauthorized: false,
-      }),
+     headers :{ Authorization:'Bearer '+data.access_token },
+      agent : httpsAgent,
       body : JSON.stringify(h)
       
   }
